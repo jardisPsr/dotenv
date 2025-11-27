@@ -3,14 +3,14 @@
 [![PHP Version](https://img.shields.io/badge/php-%3E%3D8.2-blue.svg)](https://php.net/)
 [![License](https://img.shields.io/badge/license-MIT-green.svg)](LICENSE)
 
-Eine **Contract-Only PHP-Bibliothek**, die das `DotEnvInterface` für Domain-Driven-Design-Anwendungen definiert.
+A **contract-only PHP library** that defines the `DotEnvInterface` for Domain-Driven Design applications.
 
-## Übersicht
+## Overview
 
-Dieses Paket stellt ausschließlich ein Interface bereit – **keine Implementierung**. Es dient als Abstraktionsschicht für DotEnv-Funktionalität und unterscheidet zwischen:
+This package provides exclusively an interface – **no implementation**. It serves as an abstraction layer for DotEnv functionality and distinguishes between:
 
-- **Öffentlichen Umgebungsvariablen** (systemweit, geladen in `$_ENV`)
-- **Privaten Umgebungsvariablen** (anwendungsspezifisch, als Array zurückgegeben)
+- **Public environment variables** (system-wide, loaded into `$_ENV`)
+- **Private environment variables** (application-specific, returned as an array)
 
 ## Installation
 
@@ -26,17 +26,17 @@ namespace JardisPsr\DotEnv;
 interface DotEnvInterface
 {
     /**
-     * Lädt öffentliche Umgebungsvariablen in die Systemumgebung ($_ENV, getenv)
+     * Loads public environment variables into the system environment ($_ENV, getenv)
      *
-     * @param string $pathToEnvFiles Pfad zum Verzeichnis mit .env-Dateien
+     * @param string $pathToEnvFiles Path to directory containing .env files
      * @throws Exception
      */
     public function loadPublic(string $pathToEnvFiles): void;
 
     /**
-     * Lädt und gibt private Umgebungsvariablen als Array zurück
+     * Loads and returns private environment variables as an array
      *
-     * @param string $pathToEnvFiles Pfad zum Verzeichnis mit .env-Dateien
+     * @param string $pathToEnvFiles Path to directory containing .env files
      * @return array<string, mixed>|null
      * @throws Exception
      */
@@ -44,101 +44,101 @@ interface DotEnvInterface
 }
 ```
 
-## Verwendung
+## Usage
 
-Implementieren Sie das Interface in Ihrer eigenen Klasse:
+Implement the interface in your own class:
 
 ```php
 use JardisPsr\DotEnv\DotEnvInterface;
 
-class MeinDotEnv implements DotEnvInterface
+class MyDotEnv implements DotEnvInterface
 {
     public function loadPublic(string $pathToEnvFiles): void
     {
-        // Implementierung zum Laden öffentlicher Variablen
+        // Implementation for loading public variables
     }
 
     public function loadPrivate(string $pathToEnvFiles): mixed
     {
-        // Implementierung zum Laden privater Variablen
+        // Implementation for loading private variables
         return $privateVars;
     }
 }
 ```
 
-## Entwicklung
+## Development
 
-Das Projekt nutzt Docker für alle Entwicklungsaufgaben. **Führen Sie niemals Composer-, PHPStan- oder PHPCS-Befehle direkt auf dem Host aus** – verwenden Sie immer die Makefile-Targets.
+This project uses Docker for all development tasks. **Never run Composer, PHPStan, or PHPCS commands directly on the host** – always use the Makefile targets.
 
-### Voraussetzungen
+### Prerequisites
 
 - Docker
 - Docker Compose
 - Make
 
-### Verfügbare Befehle
+### Available Commands
 
 ```bash
-# Abhängigkeiten installieren
+# Install dependencies
 make install
 
-# Abhängigkeiten aktualisieren
+# Update dependencies
 make update
 
-# Autoloader neu generieren
+# Regenerate autoloader
 make autoload
 
-# Code-Style prüfen (PSR-12)
+# Check code style (PSR-12)
 make phpcs
 
-# Statische Analyse durchführen (PHPStan Level 8)
+# Run static analysis (PHPStan Level 8)
 make phpstan
 
-# Container-Shell öffnen
+# Open container shell
 make shell
 
-# Docker-Ressourcen aufräumen
+# Clean up Docker resources
 make remove
 ```
 
-## Qualitätsstandards
+## Quality Standards
 
 ### PHP_CodeSniffer
 - **Standard**: PSR-12
-- **Zeilenlänge**: 120 (Limit), 150 (absolutes Limit)
-- Strict Types erforderlich: `declare(strict_types=1);`
+- **Line length**: 120 (limit), 150 (absolute limit)
+- Strict types required: `declare(strict_types=1);`
 
 ### PHPStan
-- **Level**: 8 (maximale Strenge)
-- **Analysierte Pfade**: `src/`
+- **Level**: 8 (maximum strictness)
+- **Analyzed paths**: `src/`
 
 ### Pre-Commit Hook
 
-Nach der Installation wird automatisch ein Git Pre-Commit Hook eingerichtet, der:
+After installation, a Git pre-commit hook is automatically set up that:
 
-1. Branch-Namen validiert: `(feature|fix|hotfix)/{1-7 digits}_{description}` oder `:{7-40 hex chars}`
-2. Git-Benutzernamen validiert
-3. PHPCS auf gestagte PHP-Dateien ausführt
-4. Commits bei Fehlern blockiert
+1. Validates branch names: `(feature|fix|hotfix)/{1-7 digits}_{description}` or `:{7-40 hex chars}`
+2. Validates Git username
+3. Runs PHPCS on staged PHP files
+4. Blocks commits on errors
 
-## PHP-Anforderungen
+## PHP Requirements
 
 - **Minimum**: PHP 8.2
-- **Empfohlen**: PHP 8.3
+- **Recommended**: PHP 8.3
 
-## Versionierung
+## Versioning
 
-Dieses Projekt folgt [Semantic Versioning](https://semver.org/). Da es sich um einen Contract handelt, sind Breaking Changes selten und erscheinen nur in Major-Versionen.
+This project follows [Semantic Versioning](https://semver.org/). Since this is a contract, breaking changes are rare and only appear in major versions.
 
-## Lizenz
+## License
 
-MIT License - siehe [LICENSE](LICENSE) für Details.
+MIT License - see [LICENSE](LICENSE) for details.
 
 ## Support
 
 - **Issues**: [GitHub Issues](https://github.com/JardisPsr/detenv/issues)
-- **E-Mail**: jardisCore@headgent.dev
+- **Email**: jardisCore@headgent.dev
 
-## Autoren
+## Authors
 
 Jardis Core Development Team
